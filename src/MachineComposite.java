@@ -19,6 +19,7 @@ public class MachineComposite extends MachineComponent {
         components.add(mc);
     }
     
+    @Override
     public boolean isBroken() {
         if (broken) { return true; }
         for (MachineComponent mc: components) {
