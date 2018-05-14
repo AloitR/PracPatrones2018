@@ -1,3 +1,6 @@
+
+import java.util.Observable;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -8,7 +11,7 @@
  *
  * @author srblimp
  */
-public abstract class MachineComponent {
+public abstract class MachineComponent extends Observable{
     protected boolean broken = false;
     
     public void setBroken() { broken = true; }
