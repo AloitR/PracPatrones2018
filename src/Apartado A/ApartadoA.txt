@@ -1,0 +1,6 @@
+El patrón que utilizaríamos sería el patrón Observador (Observer).
+
+Este patrón tiene la intención de definir una dependència de 1 a N entre objectos de manera que cuando un objecto cambia de estado,
+en este caso si estaria broken o no, todos los dependientes son notificados de manera que puedan reaccionar a ese cambio.
+
+Es por eso que este patrón nos sirve a la perfección para este problema planteado.
