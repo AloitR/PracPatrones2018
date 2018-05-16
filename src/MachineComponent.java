@@ -11,7 +11,8 @@ import java.util.Observable;
  *
  * @author srblimp
  */
-public abstract class MachineComponent extends Observable{
+public abstract class MachineComponent extends Observable
+{
     protected boolean broken = false;
     
     public void setBroken() { broken = true; }

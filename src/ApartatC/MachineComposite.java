@@ -17,8 +17,10 @@ public class MachineComposite extends MachineComponent implements Observer
         mc.addObserver(this);
     }
     
+    @Override
     public void setBroken() 
     {
+        
         if (!isBroken()) 
         {
             super.setBroken();
@@ -27,6 +29,7 @@ public class MachineComposite extends MachineComponent implements Observer
         }
     }
     
+    @Override
     public void repair() 
     {
         if (isBroken()) 
@@ -85,7 +88,7 @@ public class MachineComposite extends MachineComponent implements Observer
      */
     private void setBrokenSubComponent(MachineComponent mc) 
     {
-        // Añadimos el component a la lista de componentes rotos
+        // Add the component to the broken components list
         brokenComponents.add(mc);
         // Check if the component is broken, if component is not broken notify
         // the observers

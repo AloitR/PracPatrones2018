@@ -8,15 +8,19 @@
  *
  * @author srblimp
  */
-public class Machine extends MachineComponent {
+public class Machine extends MachineComponent 
+{
     
     @Override
-    public boolean isBroken() { 
+    public boolean isBroken() 
+    { 
         return broken; 
     }
     
-    public void setBroken() {
-        if (!isBroken()) {
+    public void setBroken() 
+    {
+        if (!isBroken()) 
+        {
             super.setBroken();
             // We have to mark as changed the broken value
             setChanged();
@@ -25,8 +29,10 @@ public class Machine extends MachineComponent {
         }
     }
     
-    public void repair() {
-        if (isBroken()) {
+    public void repair() 
+    {
+        if (isBroken()) 
+        {
             super.repair();
             // We have to mark as changed the broken value
             setChanged();
