@@ -1,4 +1,4 @@
-package ApartatD;
+package ApartatC;
 
 public class Machine extends MachineComponent 
 {
@@ -9,8 +9,9 @@ public class Machine extends MachineComponent
         return broken; 
     }
     
+    @Override
     public void setBroken() 
-    {
+    {        
         if (!isBroken()) 
         {
             super.setBroken();
@@ -21,6 +22,7 @@ public class Machine extends MachineComponent
         }
     }
     
+    @Override
     public void repair() 
     {
         if (isBroken()) 
