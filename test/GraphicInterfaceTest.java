@@ -82,8 +82,8 @@ public class GraphicInterfaceTest
     public void testMachineComposite_CompositeBreakingNotifies() 
     {
         MachineComposite machineComposite = new MachineComposite();
-        machineComposite.addObserver(graphicInterface);
-                
+        machineComposite.addObserver(graphicInterface);   
+        
         machineComposite.setBroken();
         assertTrue(graphicInterface.notify);
     }
@@ -113,8 +113,22 @@ public class GraphicInterfaceTest
         assertFalse(machineComposite.isBroken());
     }
     
+        @Test
+    public void testMachineComposite_WorkingMachinesAreNotBroken() 
+    {
+        MachineComposite machineComposite = new MachineComposite();
+        List<Machine> machines = Arrays.asList(new Machine(), new Machine());
+       
+        for(Machine machine : machines) 
+        { 
+            machineComposite.addComponent(machine); 
+        }
+   
+        assertFalse(machineComposite.isBroken());
+    }
+    
     @Test
-    public void testMachineComposite_BrokenMachine() 
+    public void testMachineComposite_OneMachineBroken() 
     {
         MachineComposite machineComposite = new MachineComposite();
         Machine machine = new Machine();
@@ -154,4 +168,7 @@ public class GraphicInterfaceTest
         machine.setBroken();
         assertTrue(graphicInterface.notify);
     }
+    
+    // Test, Composite con 2 maquinas rotas se repara una
+    // Test, Machine con 2 componentes rotos 
 }
