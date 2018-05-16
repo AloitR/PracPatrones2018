@@ -2,28 +2,45 @@ package ApartatC;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Observable;
-import java.util.Observer;
 
+<<<<<<< HEAD:src/MachineComposite.java
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+/**
+ *
+ * @author srblimp
+ */
+public class MachineComposite extends MachineComponent 
+=======
 public class MachineComposite extends MachineComponent implements Observer 
+>>>>>>> 6f3cb291d21692cb331360ab7e922fa5e7f82b27:Apartado C/MachineComposite.java
 {
     private List<MachineComponent> components = new ArrayList<>();
-    // BrokenComponents list to save if we have any components broken
-    private List<MachineComponent> brokenComponents = new ArrayList<>();
     
     public void addComponent(MachineComponent mc) 
     {
         components.add(mc);
-        mc.addObserver(this);
     }
     
+<<<<<<< HEAD:src/MachineComposite.java
     @Override
+    public boolean isBroken() 
+    {
+        if (broken) 
+        { 
+            return true; 
+        }
+        
+        for (MachineComponent mc: components) 
+        {
+            if (mc.isBroken()) { return true; }
+=======
     public void setBroken() 
     {
-<<<<<<< HEAD
-        
-=======
->>>>>>> 6f3cb291d21692cb331360ab7e922fa5e7f82b27
         if (!isBroken()) 
         {
             super.setBroken();
@@ -32,7 +49,6 @@ public class MachineComposite extends MachineComponent implements Observer
         }
     }
     
-    @Override
     public void repair() 
     {
         if (isBroken()) 
@@ -91,7 +107,7 @@ public class MachineComposite extends MachineComponent implements Observer
      */
     private void setBrokenSubComponent(MachineComponent mc) 
     {
-        // Add the component to the broken components list
+        // Añadimos el component a la lista de componentes rotos
         brokenComponents.add(mc);
         // Check if the component is broken, if component is not broken notify
         // the observers
@@ -117,6 +133,9 @@ public class MachineComposite extends MachineComponent implements Observer
         {
             setChanged();
             notifyObservers();
+>>>>>>> 6f3cb291d21692cb331360ab7e922fa5e7f82b27:Apartado C/MachineComposite.java
         }
+        
+        return false;
     }
 }

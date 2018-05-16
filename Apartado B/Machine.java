@@ -1,13 +1,12 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+package ApartatB;
 
+<<<<<<< HEAD:src/Machine.java
 /**
  *
  * @author srblimp
  */
+=======
+>>>>>>> 6f3cb291d21692cb331360ab7e922fa5e7f82b27:Apartado B/Machine.java
 public class Machine extends MachineComponent 
 {
     

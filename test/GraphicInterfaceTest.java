@@ -113,15 +113,37 @@ public class GraphicInterfaceTest
         assertFalse(machineComposite.isBroken());
     }
     
+<<<<<<< HEAD
     @Test
     public void testMachineComposite_BrokenMachine() 
+=======
+        @Test
+    public void testMachineComposite_WorkingMachinesAreNotBroken() 
+    {
+        MachineComposite machineComposite = new MachineComposite();
+        List<Machine> machines = Arrays.asList(new Machine(), new Machine());
+       
+        for(Machine machine : machines) 
+        { 
+            machineComposite.addComponent(machine); 
+        }
+   
+        assertFalse(machineComposite.isBroken());
+    }
+    
+    @Test
+    public void testMachineComposite_OneMachineBroken() 
+>>>>>>> 6f3cb291d21692cb331360ab7e922fa5e7f82b27
     {
         MachineComposite machineComposite = new MachineComposite();
         Machine machine = new Machine();
         machine.setBroken();
         
+<<<<<<< HEAD
         assertTrue(machine.isBroken());
         
+=======
+>>>>>>> 6f3cb291d21692cb331360ab7e922fa5e7f82b27
         machineComposite.addComponent(machine);
         assertTrue(machineComposite.isBroken());
     }
