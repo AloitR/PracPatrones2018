@@ -1,12 +1,5 @@
 package ApartatB;
 
-<<<<<<< HEAD:src/Machine.java
-/**
- *
- * @author srblimp
- */
-=======
->>>>>>> 6f3cb291d21692cb331360ab7e922fa5e7f82b27:Apartado B/Machine.java
 public class Machine extends MachineComponent 
 {
     
@@ -16,8 +9,9 @@ public class Machine extends MachineComponent
         return broken; 
     }
     
+    @Override
     public void setBroken() 
-    {
+    {        
         if (!isBroken()) 
         {
             super.setBroken();
@@ -28,6 +22,7 @@ public class Machine extends MachineComponent
         }
     }
     
+    @Override
     public void repair() 
     {
         if (isBroken()) 

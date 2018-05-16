@@ -11,19 +11,22 @@ public class MachineComposite extends MachineComponent implements Observer
     // BrokenComponents list to save if we have any components broken
     private List<MachineComponent> brokenComponents = new ArrayList<>();
     
+    private boolean brokentest = false;
+    
     public void addComponent(MachineComponent mc) 
     {
         components.add(mc);
         mc.addObserver(this);
+        if(mc.isBroken())
+        {
+            setChanged();
+            notifyObservers();
+        }
     }
     
     @Override
     public void setBroken() 
     {
-<<<<<<< HEAD
-        
-=======
->>>>>>> 6f3cb291d21692cb331360ab7e922fa5e7f82b27
         if (!isBroken()) 
         {
             super.setBroken();
@@ -47,12 +50,13 @@ public class MachineComposite extends MachineComponent implements Observer
         }
     }
     
+    
     @Override
     public boolean isBroken() 
     {
         // Update list of broken components
         updateSubComponentsBroken();
-        return broken && brokenComponents.size() > 0;
+        return broken || brokenComponents.size() > 0;
     }
 
     @Override
@@ -95,7 +99,7 @@ public class MachineComposite extends MachineComponent implements Observer
         brokenComponents.add(mc);
         // Check if the component is broken, if component is not broken notify
         // the observers
-        if (!mc.isBroken()) 
+        if (!isBroken()) 
         {
             setChanged();
             notifyObservers();
@@ -113,7 +117,7 @@ public class MachineComposite extends MachineComponent implements Observer
         brokenComponents.remove(mc);
         // Check if the component is broken, if component is not broken notify
         // the observers
-        if (!mc.isBroken()) 
+        if (!isBroken()) 
         {
             setChanged();
             notifyObservers();

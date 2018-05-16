@@ -1,5 +1,6 @@
-
 import ApartatC.GraphicInterface;
+import ApartatC.Machine;
+import ApartatC.MachineComposite;
 import java.util.Arrays;
 import java.util.List;
 import static org.junit.Assert.assertFalse;
@@ -7,16 +8,6 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/**
- *
- * @author AloitR
- */
 public class GraphicInterfaceTest 
 {
     private GraphicInterface graphicInterface;
@@ -93,34 +84,34 @@ public class GraphicInterfaceTest
     {
         MachineComposite machineComposite = new MachineComposite();
         machineComposite.addObserver(graphicInterface);
-        machineComposite.setBroken();
         
+        machineComposite.setBroken();
         machineComposite.repair();
         assertTrue(graphicInterface.notify);
     }
-    
-    @Test
-    public void testMachineComposite_WorkingMachinesAreNotBroken() 
+        @Test                                              
+    public void testMachineComposite_CompositeBrokenIfOneComponentBroken() 
     {
         MachineComposite machineComposite = new MachineComposite();
-        List<Machine> machines = Arrays.asList(new Machine(), new Machine());
-       
-        for(Machine machine : machines) 
-        { 
-            machineComposite.addComponent(machine); 
-        }
-   
-        assertFalse(machineComposite.isBroken());
+        machineComposite.addObserver(graphicInterface);
+        
+        Machine machine1 = new Machine();
+        Machine machine2 = new Machine();
+        
+        machineComposite.addComponent(machine1);
+        machineComposite.addComponent(machine2);
+        
+        machine1.setBroken();
+        
+        assertTrue(machineComposite.isBroken());
     }
     
-<<<<<<< HEAD
     @Test
-    public void testMachineComposite_BrokenMachine() 
-=======
-        @Test
     public void testMachineComposite_WorkingMachinesAreNotBroken() 
     {
         MachineComposite machineComposite = new MachineComposite();
+        machineComposite.addObserver(graphicInterface);
+        
         List<Machine> machines = Arrays.asList(new Machine(), new Machine());
        
         for(Machine machine : machines) 
@@ -133,18 +124,18 @@ public class GraphicInterfaceTest
     
     @Test
     public void testMachineComposite_OneMachineBroken() 
->>>>>>> 6f3cb291d21692cb331360ab7e922fa5e7f82b27
     {
         MachineComposite machineComposite = new MachineComposite();
-        Machine machine = new Machine();
-        machine.setBroken();
+        machineComposite.addObserver(graphicInterface);
         
-<<<<<<< HEAD
-        assertTrue(machine.isBroken());
+        List<Machine> machines = Arrays.asList(new Machine());
+       
+        for(Machine machine : machines) 
+        { 
+            machineComposite.addComponent(machine); 
+            machine.setBroken();
+        }
         
-=======
->>>>>>> 6f3cb291d21692cb331360ab7e922fa5e7f82b27
-        machineComposite.addComponent(machine);
         assertTrue(machineComposite.isBroken());
     }
 
@@ -154,8 +145,8 @@ public class GraphicInterfaceTest
     {
         MachineComposite machineComposite = new MachineComposite();
         machineComposite.addObserver(graphicInterface);
-        
         Machine machine = new Machine();
+        
         machine.setBroken();
         machineComposite.addComponent(machine);
         
@@ -163,22 +154,34 @@ public class GraphicInterfaceTest
     }
     
     
-    @Test
+    @Test                                              
     public void testMachineComposite_AddedComponentBreaksNotify() 
     {
         MachineComposite machineComposite = new MachineComposite();
         machineComposite.addObserver(graphicInterface);
-        
-        assertFalse(graphicInterface.notify);
-        
-        Machine machine = new Machine();
-        machineComposite.addComponent(machine);
-        
-        assertFalse(graphicInterface.notify);
-        machine.setBroken();
-        assertTrue(graphicInterface.notify);
+                
+        List<Machine> machines = Arrays.asList(new Machine());
+       
+        for(Machine machine : machines) 
+        {
+            machineComposite.addComponent(machine);
+            machine.setBroken();
+            assertTrue(machine.isBroken());
+        }
+        assertTrue(machineComposite.isBroken());
     }
     
-    // Test, Composite con 2 maquinas rotas se repara una
-    // Test, Machine con 2 componentes rotos 
+    @Test                                              
+    public void testMachineComposite_CompositeGetsRepairedNotify() 
+    {
+        MachineComposite machineComposite = new MachineComposite();
+        machineComposite.addObserver(graphicInterface);
+        
+        machineComposite.setBroken();
+        assertTrue(graphicInterface.notify);
+
+        graphicInterface.notify = false;
+        machineComposite.repair();
+        assertTrue(graphicInterface.notify);
+    }
 }
