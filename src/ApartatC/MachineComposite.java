@@ -19,8 +19,7 @@ public class MachineComposite extends MachineComponent implements Observer
         mc.addObserver(this);
         if(mc.isBroken())
         {
-            setChanged();
-            notifyObservers();
+            notifyChanges();
         }
     }
     
@@ -30,8 +29,7 @@ public class MachineComposite extends MachineComponent implements Observer
         if (!isBroken()) 
         {
             super.setBroken();
-            setChanged();
-            notifyObservers();
+            notifyChanges();
         }
     }
     
@@ -45,8 +43,7 @@ public class MachineComposite extends MachineComponent implements Observer
                 mc.repair();
             }
             super.repair();
-            setChanged();
-            notifyObservers();
+            notifyChanges();
         }
     }
     
@@ -65,7 +62,7 @@ public class MachineComposite extends MachineComponent implements Observer
         MachineComponent mc = (MachineComponent) o;
         if (mc.isBroken()) 
         {
-            setBrokenSubComponent(mc);
+            setBrokenComponent(mc);
         } 
         else 
         {
@@ -89,20 +86,19 @@ public class MachineComposite extends MachineComponent implements Observer
     }
     
     /**
-     * Set broken the subComponent passed by parameter and check
+     * Set broken the component passed by parameter and check
      * if the component is not broken to notify the observers
      * @param mc 
      */
-    private void setBrokenSubComponent(MachineComponent mc) 
+    private void setBrokenComponent(MachineComponent mc) 
     {
         // Add the component to the broken components list
         brokenComponents.add(mc);
         // Check if the component is broken, if component is not broken notify
         // the observers
-        if (!isBroken()) 
+        if (isBroken())
         {
-            setChanged();
-            notifyObservers();
+            notifyChanges();
         }
     }
     
@@ -119,8 +115,12 @@ public class MachineComposite extends MachineComponent implements Observer
         // the observers
         if (!isBroken()) 
         {
-            setChanged();
-            notifyObservers();
+            notifyChanges();
         }
+    }
+    
+    private void notifyChanges() {
+        setChanged();
+        notifyObservers();
     }
 }

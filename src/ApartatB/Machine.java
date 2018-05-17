@@ -15,10 +15,7 @@ public class Machine extends MachineComponent
         if (!isBroken()) 
         {
             super.setBroken();
-            // We have to mark as changed the broken value
-            setChanged();
-            // Notify all the components that are observing
-            notifyObservers();
+            notifyChanges();
         }
     }
     
@@ -28,10 +25,7 @@ public class Machine extends MachineComponent
         if (isBroken()) 
         {
             super.repair();
-            // We have to mark as changed the broken value
-            setChanged();
-            // Notify all the components that are observing
-            notifyObservers();
+            notifyChanges();
         }
     }
 }

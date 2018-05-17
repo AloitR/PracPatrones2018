@@ -89,7 +89,8 @@ public class GraphicInterfaceTest
         machineComposite.repair();
         assertTrue(graphicInterface.notify);
     }
-        @Test                                              
+    
+    @Test                                              
     public void testMachineComposite_CompositeBrokenIfOneComponentBroken() 
     {
         MachineComposite machineComposite = new MachineComposite();
@@ -120,6 +121,7 @@ public class GraphicInterfaceTest
         }
    
         assertFalse(machineComposite.isBroken());
+        assertFalse(graphicInterface.notify);
     }
     
     @Test
@@ -137,6 +139,7 @@ public class GraphicInterfaceTest
         }
         
         assertTrue(machineComposite.isBroken());
+        assertTrue(graphicInterface.notify);
     }
 
     
@@ -169,6 +172,7 @@ public class GraphicInterfaceTest
             assertTrue(machine.isBroken());
         }
         assertTrue(machineComposite.isBroken());
+        assertTrue(graphicInterface.notify);
     }
     
     @Test                                              
@@ -182,6 +186,7 @@ public class GraphicInterfaceTest
 
         graphicInterface.notify = false;
         machineComposite.repair();
+        assertFalse(machineComposite.isBroken());
         assertTrue(graphicInterface.notify);
     }
 }
