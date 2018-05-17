@@ -1,40 +1,47 @@
+package ApartatC;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/**
- *
- * @author srblimp
- */
-public class MachineComposite extends MachineComponent implements Observer {
+public class MachineComposite extends MachineComponent implements Observer 
+{
     private List<MachineComponent> components = new ArrayList<>();
     // BrokenComponents list to save if we have any components broken
     private List<MachineComponent> brokenComponents = new ArrayList<>();
     
-    public void addComponent(MachineComponent mc) {
+    private boolean brokentest = false;
+    
+    public void addComponent(MachineComponent mc) 
+    {
         components.add(mc);
         mc.addObserver(this);
+        if(mc.isBroken())
+        {
+            setChanged();
+            notifyObservers();
+        }
     }
     
-    public void setBroken() {
-        if (!isBroken()) {
+    @Override
+    public void setBroken() 
+    {
+        if (!isBroken()) 
+        {
             super.setBroken();
             setChanged();
             notifyObservers();
         }
     }
     
-    public void repair() {
-        if (isBroken()) {
-            for (MachineComponent mc: brokenComponents) {
+    @Override
+    public void repair() 
+    {
+        if (isBroken()) 
+        {
+            for (MachineComponent mc: brokenComponents) 
+            {
                 mc.repair();
             }
             super.repair();
@@ -43,19 +50,25 @@ public class MachineComposite extends MachineComponent implements Observer {
         }
     }
     
+    
     @Override
-    public boolean isBroken() {
+    public boolean isBroken() 
+    {
         // Update list of broken components
         updateSubComponentsBroken();
-        return broken && brokenComponents.size() > 0;
+        return broken || brokenComponents.size() > 0;
     }
 
     @Override
-    public void update(Observable o, Object arg) {
+    public void update(Observable o, Object arg) 
+    {
         MachineComponent mc = (MachineComponent) o;
-        if (mc.isBroken()) {
+        if (mc.isBroken()) 
+        {
             setBrokenSubComponent(mc);
-        } else {
+        } 
+        else 
+        {
             repairBrokenSubComponent(mc);
         }
     }
@@ -64,9 +77,12 @@ public class MachineComposite extends MachineComponent implements Observer {
      * Update list of brokenComponents to be up to date of the 
      * broken components
      */
-    private void updateSubComponentsBroken() {
-        for (MachineComponent mc: components) {
-            if (mc.isBroken()) {
+    private void updateSubComponentsBroken() 
+    {
+        for (MachineComponent mc: components) 
+        {
+            if (mc.isBroken()) 
+            {
                 brokenComponents.add(mc);
             }
         }
@@ -77,12 +93,14 @@ public class MachineComposite extends MachineComponent implements Observer {
      * if the component is not broken to notify the observers
      * @param mc 
      */
-    private void setBrokenSubComponent(MachineComponent mc) {
-        // Añadimos el component a la lista de componentes rotos
+    private void setBrokenSubComponent(MachineComponent mc) 
+    {
+        // Add the component to the broken components list
         brokenComponents.add(mc);
         // Check if the component is broken, if component is not broken notify
         // the observers
-        if (!mc.isBroken()) {
+        if (!isBroken()) 
+        {
             setChanged();
             notifyObservers();
         }
@@ -93,12 +111,14 @@ public class MachineComposite extends MachineComponent implements Observer {
      * if the component is not broken to notify the observers
      * @param mc 
      */
-    private void repairBrokenSubComponent(MachineComponent mc) {
+    private void repairBrokenSubComponent(MachineComponent mc) 
+    {
         // Remove component from the list of brokenComponents
         brokenComponents.remove(mc);
         // Check if the component is broken, if component is not broken notify
         // the observers
-        if (!mc.isBroken()) {
+        if (!isBroken()) 
+        {
             setChanged();
             notifyObservers();
         }
