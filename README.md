@@ -8,7 +8,7 @@
 
 ## [Apartado C](https://github.com/SrBlimp/PracPatrones2018/tree/master/src/ApartatC)
 
-## [Apartado D](-) (Pendiente)
+## [Apartado D](https://github.com/SrBlimp/PracPatrones2018/commit/45811cd3b2b9bef7227fe67dcaafd799c76ff038) (Aplicado sobre el apartado B y C)
 
 ## Authors
 
